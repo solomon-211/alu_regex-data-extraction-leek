@@ -1,41 +1,38 @@
 import re
 from datetime import datetime
 
-# Regex Patterns (minimum 5 types)
+# Regex Patterns (5 Data types extracted)
 
 PATTERNS = {
     'emails': {
-        'pattern': r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b',
-        'description': 'Extract email addresses'
+        'pattern': r'[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}',
     },
     'urls': {
-        'pattern': r'https?://[^\s/$.?#].[^\s]*',
+        'pattern': r'https?://(a-zA-Z.-)?\w+\.',
         'description': 'Extract HTTP/HTTPS URLs'
     },
     'phones': {
         'pattern': r'(?:\(\d{3}\)\s?|\d{3}[-.]?)\d{3}[-.]?\d{4}',
-        'description': 'Extract phone numbers in multiple formats'
     },
     'credit_cards': {
         'pattern': r'\b(?:\d{4}[-\s]?){3}\d{4}\b',
-        'description': 'Extract credit card numbers with spaces or dashes'
     },
     'times': {
-        'pattern': r'\b(?:[01]?\d|2[0-3]):[0-5]\d\s?(?:[AP]M)?\b',
-        'description': 'Extract times in 24-hour and 12-hour formats'
+        'pattern': r'\b(?:[01]?\d|2[0-3]):[0-5]\d\s?(?:[AP]M)?\b', 
     },
 }
 
 # Sample Data for Extraction
 
 SAMPLE_TEXT = """
-Contact us at john.doe@example.com or jane.smith@company.co.uk.
-Visit our site at https://www.example.com or https://subdomain.example.org/page.
-Call us at (123) 456-7890, 987-654-3210, or 123-456-7890.
-Use credit card 1234 5678 9012 3456 or 1234-5678-9012-3456 to pay.
-Our office hours are 9:00 AM to 5:30 PM, and the server backup runs at 23:45.
+Reach out to us at james.karim@elevatefuturesightfoundation.org or mercy.okello@elevatefuturesightfoundation.co.uk.
+Visit our site at https://www.elevatefuturesightfoundation.org or https://subdomain.elevatefuturesightfoundation.org/events.
+Call us at (091) 123-4567, 070-234-5678, or 078-888-9999.
+Use credit card 4321 8765 2109 6543 or 4321-8765-2109-6543 to pay.
+Our office hours are 9:00 AM to 6:00 PM, and the server backup runs at 02:30.
 Meeting scheduled for 14:30 tomorrow.
 """
+
 # Extraction Function
 
 def extract_data(text):
